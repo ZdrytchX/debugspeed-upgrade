@@ -1,0 +1,4 @@
+modEntry = {
+	FileHooks = "lua/debugspeedupgrade/FileHooks.lua",
+	Priority = 10
+}
