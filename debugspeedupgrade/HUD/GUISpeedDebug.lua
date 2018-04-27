@@ -31,36 +31,42 @@ function GUISpeedDebug:Initialize()
     self.momentumBackGround0:SetPosition(Vector(100, -210, 0))
     self.momentumBackGround0:SetSize(Vector(2, 30, 0))
     self.momentumBackGround0:SetColor(Color(1, 0.75, 0, 0.25))
-
+--5
     self.momentumBackGround1 = GetGUIManager():CreateGraphicItem()
     self.momentumBackGround1:SetAnchor(GUIItem.Left, GUIItem.Bottom)
     self.momentumBackGround1:SetPosition(Vector(200, -210, 0))
     self.momentumBackGround1:SetSize(Vector(2, 30, 0))
     self.momentumBackGround1:SetColor(Color(1, 0.625, 0, 0.25))
-
+--10
     self.momentumBackGround2 = GetGUIManager():CreateGraphicItem()
     self.momentumBackGround2:SetAnchor(GUIItem.Left, GUIItem.Bottom)
     self.momentumBackGround2:SetPosition(Vector(300, -210, 0))
     self.momentumBackGround2:SetSize(Vector(2, 30, 0))
     self.momentumBackGround2:SetColor(Color(1, 0.5, 0, 0.25))
-
+--15
     self.momentumBackGround3 = GetGUIManager():CreateGraphicItem()
     self.momentumBackGround3:SetAnchor(GUIItem.Left, GUIItem.Bottom)
     self.momentumBackGround3:SetPosition(Vector(400, -210, 0))
     self.momentumBackGround3:SetSize(Vector(2, 30, 0))
     self.momentumBackGround3:SetColor(Color(1, 0.375, 0, 0.25))
-
+--20
     self.momentumBackGround4 = GetGUIManager():CreateGraphicItem()
     self.momentumBackGround4:SetAnchor(GUIItem.Left, GUIItem.Bottom)
     self.momentumBackGround4:SetPosition(Vector(500, -210, 0))
     self.momentumBackGround4:SetSize(Vector(2, 30, 0))
     self.momentumBackGround4:SetColor(Color(1, 0.25, 0, 0.25))
-
+--25
     self.momentumBackGround5 = GetGUIManager():CreateGraphicItem()
     self.momentumBackGround5:SetAnchor(GUIItem.Left, GUIItem.Bottom)
     self.momentumBackGround5:SetPosition(Vector(600, -210, 0))
     self.momentumBackGround5:SetSize(Vector(2, 30, 0))
     self.momentumBackGround5:SetColor(Color(1, 0.125, 0, 0.25))
+--30
+    self.momentumBackGround6 = GetGUIManager():CreateGraphicItem()
+    self.momentumBackGround6:SetAnchor(GUIItem.Left, GUIItem.Bottom)
+    self.momentumBackGround6:SetPosition(Vector(700, -210, 0))
+    self.momentumBackGround6:SetSize(Vector(2, 30, 0))
+    self.momentumBackGround6:SetColor(Color(1, 0, 0, 0.25))
 
 --actual speed
     self.momentumFraction = GetGUIManager():CreateGraphicItem()
@@ -71,31 +77,49 @@ function GUISpeedDebug:Initialize()
     self.debugText:SetScale(GetScaledVector())
     self.debugText:SetFontName(kFontName)
     GUIMakeFontScale(self.debugText)
-    self.debugText:SetPosition(Vector(0, -85, 0))
+    self.debugText:SetPosition(Vector(0, -105, 0))
 
     self.airAccel = GetGUIManager():CreateTextItem()
     self.airAccel:SetScale(GetScaledVector())
     self.airAccel:SetFontName(kFontName)
     GUIMakeFontScale(self.airAccel)
-    self.airAccel:SetPosition(Vector(0, -65, 0))
+    self.airAccel:SetPosition(Vector(0, -85, 0))
 
     self.xzSpeed = GetGUIManager():CreateTextItem()
     self.xzSpeed:SetScale(GetScaledVector())
     self.xzSpeed:SetFontName(kFontName)
     GUIMakeFontScale(self.xzSpeed)
-    self.xzSpeed:SetPosition(Vector(0, -45, 0))
+    self.xzSpeed:SetPosition(Vector(0, -65, 0))
 
     self.qSpeed = GetGUIManager():CreateTextItem()
     self.qSpeed:SetScale(GetScaledVector())
     self.qSpeed:SetFontName(kFontName)
     GUIMakeFontScale(self.qSpeed)
-    self.qSpeed:SetPosition(Vector(0, -25, 0))
+    self.qSpeed:SetPosition(Vector(0, -45, 0))
+
+    --For the Americans
+    self.inchSpeed = GetGUIManager():CreateTextItem()
+    self.inchSpeed:SetScale(GetScaledVector())
+    self.inchSpeed:SetFontName(kFontName)
+    GUIMakeFontScale(self.inchSpeed)
+    self.inchSpeed:SetPosition(Vector(0, -25, 0))
 
     self.momentumBackGround:AddChild(self.debugText)
     self.momentumBackGround:AddChild(self.momentumFraction)
     self.momentumBackGround:AddChild(self.xzSpeed)
     self.momentumBackGround:AddChild(self.qSpeed)
+    self.momentumBackGround:AddChild(self.inchSpeed)
     self.momentumBackGround:AddChild(self.airAccel)
+    --[[
+    self.momentumBackGround:AddChild(self.momentumBackGround)
+    self.momentumBackGround:AddChild(self.momentumBackGround0)
+    self.momentumBackGround:AddChild(self.momentumBackGround1)
+    self.momentumBackGround:AddChild(self.momentumBackGround2)
+    self.momentumBackGround:AddChild(self.momentumBackGround3)
+    self.momentumBackGround:AddChild(self.momentumBackGround4)
+    self.momentumBackGround:AddChild(self.momentumBackGround5)
+    self.momentumBackGround:AddChild(self.momentumBackGround6)
+    --]]
 
     Shared.Message("Enabled speed meter")
 
@@ -134,10 +158,12 @@ function GUISpeedDebug:Update(deltaTime)
         end
 ]]
         local lups = speed * 32
+        local linches = speed * 39.3701
 
         self.momentumFraction:SetSize(Vector(gMomentumBarHeight * bonusSpeedFraction, 30, 0))
         self.xzSpeed:SetText( string.format( "current speed: %s m/s  vertical speed: %s m/s", ToString(RoundVelocity(speed)), ToString(RoundVelocity(velocity.y)) ) )
-        self.qSpeed:SetText( string.format( "%s equivalent quake units per second", ToString(RoundVelocity(lups)) ) )
+        self.qSpeed:SetText( string.format( "%s Quake ups", ToString(RoundVelocity(lups)) ) )
+        self.inchSpeed:SetText( string.format( "%s in/s", ToString(RoundVelocity(linches)) ) )
 
         local airAccelText = string.format( "air control value: %s m/s/s", ToString(player:GetAirControl()) )
         self.airAccel:SetText(airAccelText)
