@@ -11,3 +11,7 @@ Hammer unit (GoldSRC) is pretty similar to quake units in equivalent size (32 un
 Hammer unit (Source) is however quite different where 1 unit = 1 inches. The Spark engine map editor works with this scale by default, and textures are applied by 1 pixel = 0.5 inch or something.
 
 ![image](https://github.com/ZdrytchX/debugspeed-upgrade/assets/1125998/0795e908-b8cb-40f8-90a6-127aa9a64b7b)
+
+## Known Issues:
+
+Line markers don't despawn when removing the debugspeed display. Will not fix (doesn't play ns2 currently, community doesn't care about my mods either way)
